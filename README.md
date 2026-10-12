@@ -401,7 +401,7 @@ analysis.
 | Deliverable | Description | Location |
 |-------------|-------------|----------|
 | **Tableau Dashboard** | Four interactive Tableau Public dashboards targeting Head of Transit Planning, Head of Operations, Senior Management, and Head of Marketing. | [`Tableau Public`](https://public.tableau.com/app/profile/francine.sangil2025/viz/TTCSubwayDelay_17893342391120/D1#1) |
-| **MySQL Analysis** | 16 analytical queries spanning four stakeholder audiences | [`queries/final/ttc_subway_project_final_v3.sql`](queries/final/ttc_subway_project_final_v3.sql) |
+| **MySQL Analysis** | 16 analytical queries spanning four stakeholder audiences | [`queries/final/ttc_subway_delay_final_v3.sql`](queries/final/ttc_subway_project_final_v3.sql) |
 | **Processed Dataset** | Two consolidated and cleaned datasets produced via Power Query and MySQL, used as the basis for all analytical queries and Tableau dashboards | [`data/processed`](data/processed) |
 | **Entity Relationship Diagram** | Visual diagram showing the relationship between `ttc_subway_cleaned`, `code_desc_clean_v2`, and the `ttc_delay_tagged` view | [`visuals/TTC_Subway_Delay_ERD.png`](visuals/TTC_Subway_Delay_ERD.png) |
 | **Project Documentation** | Project documentation covering objectives, scope, data workflow, schema, ERD, analytical approach, key metrics, insights, recommendations, assumptions, and future enhancements | [`README.md`](README.md) |
