@@ -139,8 +139,7 @@ TTC_Delay_Project/
 │   └── TTC_Subway_Delay_ERD.png
 │
 ├── .gitignore
-├── README.md
-└── project_metadata.yml
+└── README.md
 
 ```
 
