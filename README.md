@@ -90,7 +90,7 @@ Four interactive Tableau Public dashboards were developed to analyze TTC subway 
 | Data Processing | MySQL, Excel (Power Query), Command Prompt |
 | Analysis | SQL Queries |
 | Visualization | Tableau |
-| Version Control | Git / GitHub |
+| Version Control | GitHub |
 | Documentation | Word / Excel |
 
 ---
