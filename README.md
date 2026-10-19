@@ -78,7 +78,7 @@ Four interactive Tableau Public dashboards were developed to analyze TTC subway 
 | Dimension | Details |
 |-----------|---------|
 | **In Scope** | Delay data across all 4 TTC Subway Lines, and delay descriptions data. Analyses cover delay frequency, delay trends, delay times, delay causes, and KPI. |
-| **Out of Scope** | - Delay data from May 2025-December 2025 were excluded as the data sets were extracted and reviewed in June 2025. <br> - Three delay records with Line 3 as the TTC Line dated after July 24, 2023 were excluded from KPI calculation in Tableau as Line 3 was shut down permanently following a derailment on July 24, 2023. Note that these three records were included in other analyses as the error was seen after the MySQL queries and Tableau dashboard were created. |
+| **Out of Scope** | - Delay data from May 2025-December 2025 were excluded as the data sets were extracted and reviewed in June 2025. <br> - Three delay records with Line 3 as the TTC Line dated after July 24, 2023 were excluded from KPI calculation in Tableau as Line 3 was shut down permanently following a derailment on July 24, 2023. Note that these three records were included in other analyses as the error was seen after the SQL queries and Tableau dashboard were created. |
 | **Time Period** | January 2014-April 2025 |
 | **Granularity** | Single delay incident per row, including the date, day, train station, delay reason, delay minutes, time gap between successive vehicles, train bound, train line, vehicle number, and timestamp |
 
@@ -88,7 +88,7 @@ Four interactive Tableau Public dashboards were developed to analyze TTC subway 
 |----------|-------------|
 | Data Storage | CSV Files |
 | Data Processing | MySQL, Excel (Power Query), Command Prompt |
-| Analysis | MySQL Queries |
+| Analysis | SQL Queries |
 | Visualization | Tableau |
 | Version Control | Git / GitHub |
 | Documentation | Word / Excel |
@@ -182,10 +182,10 @@ TTC_Delay_Project/
    - Two new tables were created using `CTE` to save the final output from data cleaning for both `ttc_subway` table and `code_desc` table: `code_desc_clean` and `ttc_subway_cleaned`.
    - Generated unique primary key values for each row in `ttc_subway_cleaned`. <br>
    - Assigned operational control level classifications to each delay reason in the `code_desc_clean` table, saving the final output to another new table, `code_desc_clean_v2` 
-   - Created a reference lookup structure, `ttc_delay_tagged`, to map delay codes in the `code_desc_clean_v2` table to the `ttc_subway_cleaned` table by using a `LEFT JOIN` within a MySQL `VIEW`, enriching delay records with delay reason descriptions and operational control level classifications.
+   - Created a reference lookup structure, `ttc_delay_tagged`, to map delay codes in the `code_desc_clean_v2` table to the `ttc_subway_cleaned` table by using a `LEFT JOIN` within a SQL `VIEW`, enriching delay records with delay reason descriptions and operational control level classifications.
    - Standardized TTC subway line names and numbers in `line` column using `CASE WHEN` queries based on an external TTC Subway line reference data, and renamed the resulting column to `cleaned_line`.
    - Standardized station names in `station` column using `CASE WHEN` queries based on an external TTC Subway station reference data, and renamed the resulting column to `cleaned_station`.
-   - Created a new column, `time_military_hour`, in `ttc_subway_cleaned` table to transform the `time` column datatype from `VARCHAR` to `TIME`, supporting the time-based analyses in MySQL and Tableau.
+   - Created a new column, `time_military_hour`, in `ttc_subway_cleaned` table to transform the `time` column datatype from `VARCHAR` to `TIME`, supporting the time-based analyses in SQL and Tableau.
    - Converted the `time_military_hour` column values into an hourly level by excluding the minutes and the AM/PM abbreviations.
    - Deleted the `time` column.
    - Converted the abbreviated values in `bound` column into the full direction descriptions, and renamed the resulting column to `cleaned_bound`. <br>
@@ -366,7 +366,7 @@ Disruption rate in these specific times and days range from 50% to 82%, which su
 - **No external validation of delay records against TTC operational logs** — 
 the dataset was sourced from Open Toronto and accepted at face value. There was no way to verify whether all delay incidents were captured, whether records were complete, or whether reporting practices changed over the January 2014–April 2025 period in ways that could affect trend comparisons.
 
-- **Line 3 Scarborough records post July 24, 2023 were not excluded from all analyses** — Line 3 was permanently shut down following a derailment on July 24, 2023. Three delay records with Line 3 as the TTC line dated after it was shut down were identified and excluded from KPI calculations in Tableau, but were retained in MySQL query results as the discrepancy was discovered after queries and dashboards were completed. This has minimal impact given the small record count but is noted for transparency.
+- **Line 3 Scarborough records post July 24, 2023 were not excluded from all analyses** — Line 3 was permanently shut down following a derailment on July 24, 2023. Three delay records with Line 3 as the TTC line dated after it was shut down were identified and excluded from KPI calculations in Tableau, but were retained in SQL query results as the discrepancy was discovered after queries and dashboards were completed. This has minimal impact given the small record count but is noted for transparency.
 
 - **Vehicle-level analysis cannot confirm persistent vehicle-specific performance issues over time** — the analysis identifies vehicles with the highest cumulative delay based on vehicle number. However, cumulative analysis does not show whether a vehicle consistently ranks among the highest-delay vehicles across multiple years. Year-over-year analysis would be required to determine whether the observed performance issues are persistent or concentrated within specific periods.
 
@@ -400,7 +400,7 @@ analysis.
 | Deliverable | Description | Location |
 |-------------|-------------|----------|
 | **Tableau Dashboard** | Four interactive Tableau Public dashboards targeting Head of Transit Planning, Head of Operations, Senior Management, and Head of Marketing. | [`Tableau Public`](https://public.tableau.com/app/profile/francine.sangil2025/viz/TTCSubwayDelay_17893342391120/D1#1) |
-| **MySQL Analysis** | 16 analytical queries spanning four stakeholder audiences | [`queries/final/ttc_subway_delay_final_v3.sql`](queries/final/ttc_subway_project_final_v3.sql) |
+| **SQL Analysis** | 16 analytical queries spanning four stakeholder audiences | [`queries/final/ttc_subway_delay_final_v3.sql`](queries/final/ttc_subway_project_final_v3.sql) |
 | **Processed Dataset** | Two consolidated and cleaned datasets produced via Power Query and MySQL, used as the basis for all analytical queries and Tableau dashboards | [`data/processed`](data/processed) |
 | **Entity Relationship Diagram** | Visual diagram showing the relationship between `ttc_subway_cleaned`, `code_desc_clean_v2`, and the `ttc_delay_tagged` view | [`visuals/TTC_Subway_Delay_ERD.png`](visuals/TTC_Subway_Delay_ERD.png) |
 | **Project Documentation** | Project documentation covering objectives, scope, data workflow, schema, ERD, analytical approach, key metrics, insights, recommendations, assumptions, and future enhancements | [`README.md`](README.md) |
